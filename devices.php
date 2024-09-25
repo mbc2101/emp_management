@@ -23,7 +23,7 @@ $sql = '
     LEFT JOIN ownership o ON d.deviceid = o.deviceid
     LEFT JOIN users u ON o.userid = u.userid
     LEFT JOIN statusdefinitions s ON d.statusid = s.statusid  -- Join with statusdefinitions table
-    WHERE dt.brand LIKE :searchTerm OR dt.model LIKE :searchTerm OR d.serialnumber LIKE :searchTerm
+    WHERE o.unassigned_at is null and  (dt.brand LIKE :searchTerm OR dt.model LIKE :searchTerm OR d.serialnumber LIKE :searchTerm )
     GROUP BY d.deviceid, dt.brand, dt.model, dt.size, dt.memory, dt.os, dt.sim, dt.resolution, 
              d.serialnumber, d.macaddress, d.statusid, s.description
 ';
